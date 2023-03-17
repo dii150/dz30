@@ -106,7 +106,7 @@ function addPurchaseToList(purchaseName, purchaseQuantity, purchasePrice) {
         existingPurchase.quantity += purchaseQuantity;
         existingPurchase.sum = existingPurchase.quantity * existingPurchase.price;
     } else {
-        groceryList.push({
+        sortedGroceryList.push({
             name: purchaseName,
             quantity: purchaseQuantity,
             isBought: false,
