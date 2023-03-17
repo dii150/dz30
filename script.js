@@ -41,7 +41,7 @@ const groceryList = [
 console.log('*------------------------------------*');
 console.log('Список товарів, спочатку не придбані:');
 
-groceryList.sort((a, b) => {
+const sortedGroceryList = groceryList.sort((a, b) => {
     if (a.isBought === b.isBought) {
         return 0;
     } else if (a.isBought) {
@@ -51,14 +51,14 @@ groceryList.sort((a, b) => {
     }
 });
 
-console.log(groceryList);
+console.log(sortedGroceryList);
 
 //Покупка продукту. Функція приймає назву продукту і відзначає його як придбаний.
 console.log('*------------------------------------*');
 console.log('Покупаємо один з товарів:');
 
 function buyProduct(productName) {
-    const product = groceryList.find(item => item.name === productName);
+    const product = sortedGroceryList.find(item => item.name === productName);
     if (product) {
         product.isBought = true;
         console.log(`Ура, ми купили ${productName}`);
@@ -68,7 +68,7 @@ function buyProduct(productName) {
 }
 buyProduct('Pizza');
 console.log('А оце ми знову відсортували і написали оновлений список')
-groceryList.sort((a, b) => {
+sortedGroceryList.sort((a, b) => {
     if (a.isBought === b.isBought) {
         return 0;
     } else if (a.isBought) {
@@ -77,7 +77,7 @@ groceryList.sort((a, b) => {
         return 1;
     }
 });
-console.log(groceryList);
+console.log(sortedGroceryList);
 
 
 //Видалення продукту зі списку (видалення повинно проводитися шляхом створення нового масиву,
@@ -86,9 +86,9 @@ console.log('*------------------------------------*');
 console.log('Видаляємо товар:');
 
 function deleteItem(itemToDelete) {
-    const GroceryList = groceryList.filter(groceryList => groceryList.name !== itemToDelete);
+    const newGroceryList = sortedGroceryList.filter(groceryList => sortedGroceryList.name !== itemToDelete);
     console.log(`Ми видалили ${itemToDelete}`)
-    console.log(GroceryList);
+    console.log(newGroceryList);
 }
 deleteItem('Pizza');
 
@@ -101,7 +101,7 @@ console.log('*------------------------------------*');
 console.log('Додаємо товар:');
 
 function addPurchaseToList(purchaseName, purchaseQuantity, purchasePrice) {
-    let existingPurchase = groceryList.find(purchase => purchase.name === purchaseName);
+    let existingPurchase = sortedGroceryList.find(purchase => purchase.name === purchaseName);
     if (existingPurchase) {
         existingPurchase.quantity += purchaseQuantity;
         existingPurchase.sum = existingPurchase.quantity * existingPurchase.price;
@@ -119,14 +119,14 @@ function addPurchaseToList(purchaseName, purchaseQuantity, purchasePrice) {
 
 addPurchaseToList('Onion', 2, 5);
 addPurchaseToList('Tea', 3, 4);
-console.log(groceryList);
+console.log(sortedGroceryList);
 
 
 //Підрахунок суми всіх продуктів (враховуючи кількість кожного) в списку.
 console.log('*------------------------------------*');
 console.log('Рахуємо суму всіх покупок:');
 
-const sum = groceryList.reduce((total, item) => total + item.sum, 0);
+const sum = sortedGroceryList.reduce((total, item) => total + item.sum, 0);
 console.log(sum);
 
 
@@ -135,7 +135,7 @@ console.log('*------------------------------------*');
 console.log('Рахуємо суму придбаних покупок:');
 
 function sumOfBought() {
-    const newGroceryList = groceryList.filter(groceryList => groceryList.isBought === true);
+    const newGroceryList = sortedGroceryList.filter(groceryList => groceryList.isBought === true);
     const sumOfBought = newGroceryList.reduce((total, item) => total + item.sum, 0);
     console.log(`Сума куплених товарів: ${sumOfBought}`)
 }
@@ -145,7 +145,7 @@ sumOfBought();
 console.log('*------------------------------------*');
 console.log('Рахуємо суму непридбаних покупок:');
 function sumOfNotBought() {
-    const newGroceryList = groceryList.filter(groceryList => groceryList.isBought === false);
+    const newGroceryList = sortedGroceryList.filter(groceryList => groceryList.isBought === false);
     const sumOfBought = newGroceryList.reduce((total, item) => total + item.sum, 0);
     console.log(`Сума некуплених товарів: ${sumOfBought}`)
 }
